@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Photo by UUID</title>
+</head>
+<body>
+    <h1>Retrieve Photo</h1>
+    <form id="get-photo-form">
+        <label for="uuid">Enter Photo UUID:</label>
+        <div class="inputuuid">
+               <input type="text" id="uuid" name="uuid" required>
+        </div>
+     
+        <button type="submit">Get Photo</button>
+    </form>
+    <div id="photo-container"></div>
+
+    <script>
+        document.getElementById('get-photo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var uuid = document.getElementById('uuid').value;
+            var photoContainer = document.getElementById('photo-container');
+            photoContainer.innerHTML = ''; 
+            
+            var img = new Image(500, 500); 
+            img.src = '/photo/' + uuid;
+            img.alt = 'Photo';
+            img.onerror = function() {
+                photoContainer.innerHTML = 'Photo not found or there was an error loading the photo.';
+            };
+            photoContainer.appendChild(img);
+        });
+    </script>
+</body>
+</html>
